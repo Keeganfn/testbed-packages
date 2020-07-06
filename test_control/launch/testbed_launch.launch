@@ -1,0 +1,55 @@
+<launch>
+
+<node
+	name="test_control2"
+	pkg="test_control"
+	type="start_tests"
+	output="screen"
+/>
+
+<node
+	name="arm_control"
+	pkg="arm_control"
+	type="arm_communication"
+	output="screen"
+/>
+<node
+	name="bed_control_test"
+	pkg="bed_control"
+	type="bed_error_catching"
+	output="screen"
+/>
+<node
+	name="bed_control"
+	pkg="bed_control"
+	type="bed_reset"
+	output="screen"
+/>
+<node
+name="serial_node"        
+pkg="rosserial_python"      
+type="serial_node.py">
+
+<param name="port" type="string" value="/dev/ttyACM0"/>
+
+<param name="baud" type="int" value="57600"/>
+
+</node>
+
+<node
+	name="data_collector"
+	pkg="data_collection"
+	type="arm_data_write"
+	respawn="true"
+/>
+
+
+<node
+	name="test_control1"
+	pkg="test_control"
+	type="test_queue"
+	output="screen"
+/>
+
+
+</launch>
